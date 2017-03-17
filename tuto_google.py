@@ -60,11 +60,7 @@ def get_credentials():
     return credentials
 
 def main():
-    """Shows basic usage of the Google Drive API.
 
-    Creates a Google Drive API service object and outputs the names and IDs
-    for up to 10 files.
-    """
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     drive_service = discovery.build('drive', 'v3', http=http)
@@ -90,14 +86,14 @@ def main():
 
 
 
-        response = drive_service.files().list(q="(mimeType contains 'xlxs' "+"or mimeType contains 'pdf') and modifiedTime > '2012-06-04T12:00:00-08:00'",
+        response = drive_service.files().list(q="(mimeType contains 'xlxs' "+"or mimeType contains 'png') and modifiedTime > '2012-06-04T12:00:00-08:00'",
                                               spaces='drive',
                                               fields='nextPageToken, files(id, name)',
                                               pageToken=page_token).execute()
 
         last_update.update()
         print("********************************************************")
-        print("début du téléchargement des nouveaux fichiers")
+        print("downloading new files")
         print("********************************************************")
         files = response.get('files', [])
         if not files:

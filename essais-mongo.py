@@ -22,6 +22,7 @@ post = {"author": "Mike",
 posts=db.post
 posts.insert_one(post)
 
+
 import pprint
 pprint.pprint(posts.find_one({"author": "Mike"}))
 
